@@ -1,0 +1,16 @@
+frontend/dist
+frontend/e2e
+frontend/node_modules
+backend/vendor
+.git
+.gitignore
+.env
+data/*
+# docker-compose.yml
+# composer.dockerfile
+# cron.dockerfile
+# crontab
+# Dockerfile.backend
+# Dockerfile.frontend
+# nginx.dockerfile
+node_modules
