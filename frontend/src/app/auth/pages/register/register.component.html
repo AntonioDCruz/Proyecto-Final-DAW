@@ -1,0 +1,79 @@
+<div class="register">
+  <form class="custom-form" method="post" [formGroup]="miFormulario">
+    <h1>Register</h1>
+
+    <input
+      type="text"
+      formControlName="nombre_user"
+      name="nombre_user"
+      placeholder="Nombre"
+    />
+    <small class="text-danger" id="" *ngIf="error('nombre_user')"
+      >{{ nombreUserMsg }}
+    </small>
+
+    <input
+      type="text"
+      formControlName="apellidos"
+      name="apellidos"
+      placeholder="Apellidos"
+    />
+    <small class="text-danger" id="" *ngIf="error('apellidos')"
+      >{{ apellidosMsg }}
+    </small>
+
+    <input
+      type="email"
+      formControlName="email"
+      name="email"
+      placeholder="Email"
+    />
+    <small class="text-danger" id="" *ngIf="error('email')"
+      >{{ emailMsg }}
+    </small>
+
+    <input
+      type="text"
+      formControlName="nombre_equipo"
+      name="nombre_equipo"
+      placeholder="Nombre de tu equipo"
+    />
+    <small class="text-danger" id="" *ngIf="error('nombre_equipo')"
+      >{{ nombreEquipoMsg }}
+    </small>
+
+    <input
+      type="text"
+      formControlName="liga"
+      name="liga"
+      placeholder="Nombre de la liga de tu equipo"
+    />
+    <small class="text-danger" id="" *ngIf="error('liga')"
+      >{{ ligaMsg }}
+    </small>
+
+    <input
+      type="password"
+      formControlName="password"
+      name="password"
+      placeholder="Contraseña"
+      required="required"
+    />
+    <small class="text-danger" id="" *ngIf="error('password')"
+      >{{ passwordMsg }}
+    </small>
+
+    <input
+      type="password"
+      formControlName="password_confirm"
+      name="password_confirm"
+      placeholder="Repite la contraseña"
+      required="required"
+    />
+    <small class="text-danger" id="" *ngIf="error('password_confirm')"
+      >{{ passwordConfirmMsg }}
+    </small>
+
+    <button type="submit" (click)="register()">Register</button>
+  </form>
+</div>

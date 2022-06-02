@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@700&display=swap");
+
+img {
+  width: 100px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px dotted #bcd8c1;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.frase {
+  width: 100%;
+}
+
+h2 {
+  font-family: "Baloo Tamma 2";
+  text-align: center;
+  width: 100%;
+  margin: 0px auto;
+  color: #fff;
+  font-size: 5vw;
+  letter-spacing: 5px;
+  top: 50%;
+  position: absolute;
+  margin-top: -40px;
+  text-shadow: -1px -1px 0px #bcd8c1, 3px 3px 0px #bcd8c1, 6px 6px 0px #98d4a3;
+}

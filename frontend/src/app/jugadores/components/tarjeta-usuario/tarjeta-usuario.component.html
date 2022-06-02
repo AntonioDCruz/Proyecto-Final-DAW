@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ user.nombre_user + " " + user.apellidos }}
+    </mat-card-title>
+    <mat-card-subtitle> {{ user.role_id | rol }} </mat-card-subtitle>
+  </mat-card-header>
+
+  <!-- <img mat-card-image src="assets/heroes/{{ heroe.id }}.jpg" alt=""> -->
+  <img mat-card-image [src]="user | imagen" alt="" />
+
+  <mat-card-content>
+    <p>
+      <span *ngIf="user.id_jugador">
+        <strong>Estado: </strong> {{ user?.estado | titlecase }}
+        <br />
+      </span>
+      <strong>Email: </strong> {{ user.email }}
+      <br />
+      <strong>Teléfono: </strong> {{ user.telefono }}
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="mostrarBotones()">
+    <button mat-button color="info" [routerLink]="['./verMas', user.id]">
+      Ver más
+    </button>
+
+    <button mat-button color="info" [routerLink]="editarRoute(user)">
+      Editar
+    </button>
+
+    <!--  <button *ngIf="user.id === 3" mat-button color="info" [routerLink]="">
+      Editar
+    </button> -->
+
+    <button mat-button *ngIf="deleteBtn" color="warn" (click)="borrarUser()">
+      Eliminar
+    </button>
+  </mat-card-actions>
+</mat-card>

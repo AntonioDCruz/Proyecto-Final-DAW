@@ -1,0 +1,56 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info class="animate__fadeInLeft">
+  <h1 class="text-center mt-2">Mi Equipo</h1>
+  <mat-divider></mat-divider>
+  <br />
+
+  <div class="row text-center" *ngIf="authUser.role_id < 3">
+    <span span class="p-buttonset text-center">
+      <button
+        *ngIf="authUser.role_id === 1"
+        [routerLink]="['./crearEntrenador']"
+        pButton
+        type="button"
+        label="Añadir entrenador"
+        icon="pi pi-user-plus"
+        iconPos="left"
+      ></button>
+      <button
+        pButton
+        type="button"
+        [routerLink]="['./crearJugador']"
+        label="Añadir jugador"
+        icon="pi pi-users"
+        iconPos="right"
+      ></button>
+    </span>
+  </div>
+
+  <div
+    #div
+    fxLayout="row wrap"
+    fxLayout.xs="column"
+    fxLayoutAlign="center"
+    fxLayoutGap="20px"
+  >
+    <div
+      fxFlex="20"
+      fxFlex.sm="30"
+      fxFlex.lg="15"
+      fxFlex.xl="15"
+      *ngFor="let user of users"
+    >
+      <app-tarjeta-usuario
+        [user]="user"
+        [authUser]="authUser"
+        (emitUsers)="recargarUsers($event)"
+      ></app-tarjeta-usuario>
+    </div>
+  </div>
+</ng-template>

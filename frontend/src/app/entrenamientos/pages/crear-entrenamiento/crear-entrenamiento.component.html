@@ -1,0 +1,68 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <h2 class="text-center mt-2">
+    {{ entrenamiento ? "Editar" : "Nuevo" }} Entrenamiento
+  </h2>
+
+  <form [formGroup]="miFormulario" (submit)="guardar()">
+    <div class="row m-5 justify-content-center">
+      <div class="col-3"></div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-1 mb-3">
+        <span class="form-text">Día del entrenamiento</span>
+        <div class="col"></div>
+        <p-calendar formControlName="fecha"></p-calendar>
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('fecha')"
+          >{{ fechaMsg }}
+        </small>
+      </div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-3">
+        <span class="form-text">Hora del entrenamiento</span>
+        <input
+          class="form-control"
+          formControlName="hora"
+          type="time"
+          id="appt"
+          name="appt"
+          min="09:00"
+          max="21:00"
+          required
+        />
+        <small class="text-danger" id="" *ngIf="error('hora')"
+          >{{ horaMsg }}
+        </small>
+      </div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-3">
+        <span class="form-text">Descripcion</span>
+        <div class="col"></div>
+        <textarea
+          formControlName="descripcion"
+          [rows]="5"
+          [cols]="30"
+          pInputTextarea
+          [autoResize]="true"
+        ></textarea>
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('descripcion')"
+          >{{ descMsg }}
+        </small>
+      </div>
+    </div>
+
+    <div class="m-5">
+      <p-button
+        class="float-end"
+        label="Guardar"
+        type="submit"
+        icon="pi pi-check"
+        iconPos="right"
+      ></p-button>
+    </div>
+  </form>
+</ng-template>

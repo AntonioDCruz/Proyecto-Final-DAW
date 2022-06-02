@@ -1,0 +1,79 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <h2 class="text-center mt-2">{{ evento ? "Editar" : "Nuevo" }} Evento</h2>
+
+  <form [formGroup]="miFormulario" (submit)="guardar()">
+    <div class="row m-5 justify-content-center">
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-2 mb-3">
+        <span class="form-text">Título del evento</span>
+        <div class="col"></div>
+        <input
+          formControlName="titulo"
+          class="p-inputtext"
+          type="text"
+          pInputText
+        />
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('titulo')"
+          >{{ tituloMsg }}
+        </small>
+      </div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-2 mb-3">
+        <span class="form-text">Día del evento</span>
+        <div class="col"></div>
+        <p-calendar formControlName="fecha"></p-calendar>
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('fecha')"
+          >{{ fechaMsg }}
+        </small>
+      </div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-3">
+        <span class="form-text">Hora del evento</span>
+        <input
+          class="form-control"
+          formControlName="hora"
+          type="time"
+          id="appt"
+          name="appt"
+          min="09:00"
+          max="21:00"
+          required
+        />
+        <small class="text-danger" id="" *ngIf="error('hora')"
+          >{{ horaMsg }}
+        </small>
+      </div>
+      <div class="ms-2 col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 mb-3">
+        <span class="form-text">Descripcion</span>
+        <div class="col"></div>
+        <textarea
+          formControlName="descripcion"
+          [rows]="5"
+          [cols]="40"
+          pInputTextarea
+          [autoResize]="true"
+        ></textarea>
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('descripcion')"
+          >{{ descMsg }}
+        </small>
+      </div>
+    </div>
+
+    <div class="m-5">
+      <p-button
+        class="float-end"
+        label="Guardar"
+        type="submit"
+        icon="pi pi-check"
+        iconPos="right"
+      ></p-button>
+    </div>
+  </form>
+</ng-template>

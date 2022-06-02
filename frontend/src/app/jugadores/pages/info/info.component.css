@@ -1,0 +1,39 @@
+mat-card {
+  background-color: #bcd8c1;
+}
+
+mat-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px dotted #bcd8c1;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  animation: rotation 2s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.equipoImg {
+  height: 100px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: end;
+  align-self: center;
+}

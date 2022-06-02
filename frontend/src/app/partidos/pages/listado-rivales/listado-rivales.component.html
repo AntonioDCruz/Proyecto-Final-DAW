@@ -1,0 +1,70 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <p-messages [value]="msgs"></p-messages>
+
+  <div class="row text-center m-4" *ngIf="authUser.role_id < 3">
+    <span span class="p-buttonset text-center">
+      <button
+        pButton
+        type="button"
+        routerLink="/inicio/partidos/crearRival"
+        label="Añadir rival"
+        icon="pi pi-plus"
+        iconPos="right"
+      ></button>
+    </span>
+  </div>
+
+  <div class="frase" *ngIf="rivales.length === 0; else tabla">
+    <h2>No hay rivales disponibles</h2>
+  </div>
+
+  <ng-template #tabla>
+    <p-confirmDialog
+      header="Confirmation"
+      icon="pi pi-exclamation-triangle"
+    ></p-confirmDialog>
+
+    <div class="content">
+      <p-table [value]="rivales" [scrollable]="true" scrollHeight="100%">
+        <ng-template class="xddd" pTemplate="header">
+          <tr>
+            <th style="min-width: 200px">Escudo</th>
+            <th style="min-width: 200px">Nombre</th>
+            <th style="min-width: 200px"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rival>
+          <tr>
+            <td style="min-width: 200px"><img [src]="rival.image" alt="" /></td>
+            <td style="min-width: 200px">{{ rival.nombre }}</td>
+            <td>
+              <p-button
+                label="Editar"
+                icon="pi pi-pencil"
+                iconPos="right"
+                styleClass="p-button-secondary"
+                [routerLink]="['/inicio/partidos/editarRival', rival.id]"
+                [style]="{ 'margin-left': '.5em' }"
+              ></p-button>
+              <p-button
+                (click)="confirm2(rival)"
+                icon="pi pi-times"
+                label="Eliminar"
+                iconPos="right"
+                styleClass="p-button-danger"
+                [style]="{ 'margin-left': '.5em' }"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template>
+</ng-template>

@@ -1,0 +1,117 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <h2 class="text-center mt-2">{{ partido ? "Editar" : "Nuevo" }} Partido</h2>
+
+  <form [formGroup]="miFormulario" (submit)="guardar()">
+    <div class="row m-5">
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-2 mb-3">
+        <span class="form-text">Puntos Mi Equipo</span>
+        <div class="col"></div>
+        <p-inputNumber inputId="integeronly" formControlName="puntos_equipo">
+        </p-inputNumber>
+        <small class="text-danger" id="" *ngIf="error('puntos_equipo')"
+          >{{ puntosEquipoMsg }}
+        </small>
+      </div>
+      <div class="col-8"></div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-2 mb-3">
+        <span class="form-text">Puntos Equipo Rival</span>
+        <div class="col"></div>
+        <p-inputNumber inputId="integeronly" formControlName="puntos_rival">
+        </p-inputNumber>
+        <small class="text-danger" id="" *ngIf="error('puntos_rival')"
+          >{{ puntosRivalMsg }}
+        </small>
+      </div>
+    </div>
+
+    <div class="row m-5">
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-1 mb-3">
+        <span class="form-text">Día del partido</span>
+        <div class="col"></div>
+        <p-calendar formControlName="fecha"></p-calendar>
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('fecha')"
+          >{{ fechaMsg }}
+        </small>
+      </div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-3">
+        <span class="form-text">Hora del partido</span>
+        <input
+          class="form-control"
+          formControlName="hora"
+          type="time"
+          id="appt"
+          name="appt"
+          min="09:00"
+          max="21:00"
+          required
+        />
+        <small class="text-danger" id="" *ngIf="error('hora')"
+          >{{ horaMsg }}
+        </small>
+      </div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-3">
+        <span class="form-text">Campo</span>
+        <select
+          name="campo"
+          id="campo"
+          class="form-control"
+          formControlName="campo"
+        >
+          <option value="">-- Seleccione un campo --</option>
+          <option value="local">Local</option>
+          <option value="visitante">Visitante</option>
+        </select>
+        <small class="text-danger" id="" *ngIf="error('campo')"
+          >{{ campoMsg }}
+        </small>
+      </div>
+
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 mb-3">
+        <span class="form-text">Rival</span>
+        <select
+          name="rival"
+          id="rival"
+          class="form-control"
+          formControlName="rival_id"
+        >
+          <option value="">-- Seleccione un rival --</option>
+          <option *ngFor="let rival of rivales" [value]="rival.id">
+            {{ rival.nombre }}
+          </option>
+        </select>
+        <p-button
+          class="m-1"
+          styleClass="p-button-sm"
+          label="Ver rivales"
+          routerLink="/inicio/partidos/listadoRivales"
+          type="button"
+          icon="pi pi-plus"
+          iconPos="right"
+        >
+        </p-button>
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('rival_id')"
+          >{{ rivalMsg }}
+        </small>
+      </div>
+    </div>
+
+    <div class="m-5">
+      <p-button
+        class="float-end"
+        label="Guardar"
+        type="submit"
+        icon="pi pi-check"
+        iconPos="right"
+      ></p-button>
+    </div>
+  </form>
+</ng-template>

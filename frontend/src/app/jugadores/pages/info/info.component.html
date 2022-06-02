@@ -1,0 +1,71 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <p-dialog [header]="header" [(visible)]="display">
+    {{ content }}
+  </p-dialog>
+
+  <div class="row m-3">
+    <div
+      class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-8 order-5 order-xs-5 order-sm-5 order-md-5 order-lg-1"
+    >
+      <p-fullCalendar
+        *ngIf="aux"
+        [events]="events"
+        [options]="options"
+      ></p-fullCalendar>
+    </div>
+    <div
+      class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 order-1 order-xs-1 order-sm-1 order-md-1 order-lg-5 mb-3"
+    >
+      <mat-card>
+        <mat-card-content>
+          <div>
+            <h2>{{ equipo?.nombre }}</h2>
+            <h3>{{ equipo?.liga }}</h3>
+          </div>
+          <img class="equipoImg" [src]="equipo! | imagenEquipo" />
+        </mat-card-content>
+        <mat-card-actions *ngIf="user.role_id === 1" align="start">
+          <button mat-button [routerLink]="['./editarEquipo', equipo?.id]">
+            <mat-icon>settings</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="mt-2">
+        <mat-card-header>
+          <mat-card-title>
+            {{ user.nombre_user + " " + user.apellidos }}
+          </mat-card-title>
+          <mat-card-subtitle> {{ user.role_id | rol }} </mat-card-subtitle>
+        </mat-card-header>
+
+        <!-- <img mat-card-image src="assets/heroes/{{ heroe.id }}.jpg" alt=""> -->
+        <img mat-card-image [src]="user | imagen" alt="" />
+
+        <mat-card-content>
+          <p>
+            <span *ngIf="jugador">
+              <strong>Estado: </strong> {{ jugador?.estado | titlecase }}
+              <br />
+            </span>
+            <strong>Email: </strong> {{ user.email }}
+            <br />
+            <strong>Teléfono: </strong> {{ user.telefono }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions *ngIf="user.role_id === 1" align="start">
+          <button mat-button [routerLink]="['./equipo/editarManager', user.id]">
+            <mat-icon>settings</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-template>

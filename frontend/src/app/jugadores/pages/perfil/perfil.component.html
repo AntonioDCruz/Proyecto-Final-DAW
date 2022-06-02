@@ -1,0 +1,88 @@
+<h2 class="text-center mt-2">Información de tu cuenta</h2>
+<form [formGroup]="infoForm" (submit)="infoSubmit()">
+  <span class="row ms-5 me-5 mt-5 p-float-label">
+    <input
+      formControlName="nombre_user"
+      class="p-inputtext-lg"
+      type="text"
+      pInputText
+    />
+    <label for="float-input">Nombre</label>
+  </span>
+  <small class="text-danger ms-5" *ngIf="errorInfoForm('nombre_user')"
+    >{{ nombreUserMsg }}
+  </small>
+
+  <span class="row ms-5 me-5 mt-5 p-float-label">
+    <input
+      formControlName="apellidos"
+      class="p-inputtext-lg"
+      type="text"
+      pInputText
+    />
+    <label for="float-input">Apellidos</label>
+  </span>
+  <small class="text-danger ms-5" *ngIf="errorInfoForm('apellidos')"
+    >{{ apellidosMsg }}
+  </small>
+
+  <span class="row ms-5 me-5 mt-5 p-float-label">
+    <input
+      formControlName="email"
+      class="p-inputtext-lg"
+      type="email"
+      pInputText
+    />
+    <label for="float-input">Email</label>
+  </span>
+  <small class="text-danger ms-5" *ngIf="errorInfoForm('email')"
+    >{{ emailMsg }}
+  </small>
+
+  <div class="center mt-2">
+    <p-button
+      label="Guardar"
+      type="submit"
+      icon="pi pi-check"
+      iconPos="right"
+    ></p-button>
+  </div>
+</form>
+
+<h2 class="text-center mt-5">Cambiar contraseña</h2>
+<form [formGroup]="passwordForm" (submit)="passwordSubmit()">
+  <span class="row ms-5 me-5 mt-5 p-float-label">
+    <input
+      formControlName="password"
+      class="p-inputtext-lg"
+      type="password"
+      pInputText
+    />
+    <label for="float-input">Contraseña</label>
+  </span>
+  <small class="text-danger ms-5" *ngIf="errorPasswordForm('password')"
+    >{{ passwordMsg }}
+  </small>
+
+  <span class="row ms-5 me-5 mt-5 p-float-label">
+    <input
+      formControlName="password_confirm"
+      class="p-inputtext-lg"
+      type="password"
+      pInputText
+    />
+    <label for="float-input">Confirmar contraseña</label>
+  </span>
+  <small class="text-danger ms-5" *ngIf="errorPasswordForm('password_confirm')"
+    >{{ passwordConfirmMsg }}
+  </small>
+
+  <div class="center mt-2">
+    <p-button
+      label="Guardar"
+      type="submit"
+      icon="pi pi-check"
+      iconPos="right"
+    ></p-button>
+  </div>
+</form>

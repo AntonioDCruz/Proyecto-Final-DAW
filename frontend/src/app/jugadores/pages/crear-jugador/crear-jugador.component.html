@@ -1,0 +1,166 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <h2 class="text-center mt-2">{{ title }} Jugador</h2>
+  <form [formGroup]="miFormulario" (submit)="guardar()">
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="nombre_user"
+        class="p-inputtext-lg"
+        type="text"
+        pInputText
+      />
+      <label for="float-input">Nombre</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('nombre_user')"
+      >{{ nombreUserMsg }}
+    </small>
+
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="apellidos"
+        class="p-inputtext-lg"
+        type="text"
+        pInputText
+      />
+      <label for="float-input">Apellidos</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('apellidos')"
+      >{{ apellidosMsg }}
+    </small>
+
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="email"
+        class="p-inputtext-lg"
+        type="email"
+        pInputText
+      />
+      <label for="float-input">Email</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('email')"
+      >{{ emailMsg }}
+    </small>
+
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="salario"
+        class="p-inputtext-lg"
+        type="number"
+        pInputText
+      />
+      <label for="float-input">Salario</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('salario')"
+      >{{ salarioMsg }}
+    </small>
+
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="telefono"
+        class="p-inputtext-lg"
+        type="tel"
+        pInputText
+      />
+      <label for="float-input">Telefono</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('telefono')"
+      >{{ telefonoMsg }}
+    </small>
+
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="numero"
+        class="p-inputtext-lg"
+        type="number"
+        pInputText
+      />
+      <label for="float-input">Dorsal</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('numero')"
+      >{{ numeroMsg }}
+    </small>
+
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="nacionalidad"
+        class="p-inputtext-lg"
+        type="text"
+        pInputText
+      />
+      <label for="float-input">Nacionalidad</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('nacionalidad')"
+      >{{ nacionalidadMsg }}
+    </small>
+
+    <div class="row ms-5 me-5 mt-5">
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-1 mb-3">
+        <span class="form-text">Fecha de nacimiento</span>
+        <div class="col"></div>
+        <p-calendar formControlName="fec_nac"></p-calendar>
+        <div class="col"></div>
+        <small class="text-danger" *ngIf="error('fec_nac')"
+          >{{ fechaMsg }}
+        </small>
+      </div>
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 mb-3">
+        <span class="form-text">Estado</span>
+        <select
+          formControlName="estado"
+          name="estado"
+          id="estado"
+          class="form-control"
+        >
+          <option value="disponible">Disponible</option>
+          <option value="lesionado">Lesionado</option>
+          <option value="sancionado">Sancionado</option>
+        </select>
+        <small class="text-danger" *ngIf="error('estado')"
+          >{{ estadoMsg }}
+        </small>
+      </div>
+
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 mb-3">
+        <span class="form-text">Posicion</span>
+        <select formControlName="position_id" class="form-control">
+          <option *ngFor="let posicion of posiciones" [ngValue]="posicion.id">
+            {{ posicion.nombre }}
+          </option>
+        </select>
+        <small class="text-danger" *ngIf="error('position_id')"
+          >{{ posicionMsg }}
+        </small>
+      </div>
+
+      <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 mb-3">
+        <span class="form-text">Imagen</span>
+        <div class="input-group">
+          <input
+            formControlName="image_user"
+            class="form-control"
+            name="image_user"
+          />
+          <app-upload
+            (uploaded)="miFormulario.patchValue({ image_user: $event })"
+          ></app-upload>
+        </div>
+      </div>
+    </div>
+
+    <div class="ms-5 me-5 mt-5">
+      <p-button
+        class="float-end"
+        label="Guardar"
+        type="submit"
+        icon="pi pi-check"
+        iconPos="right"
+      ></p-button>
+    </div>
+  </form>
+</ng-template>

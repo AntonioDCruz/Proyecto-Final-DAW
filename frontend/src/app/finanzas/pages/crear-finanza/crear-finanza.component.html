@@ -1,0 +1,72 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <h2 class="text-center mt-2">{{ finanza ? "Editar" : "Nueva" }} Finanza</h2>
+
+  <form [formGroup]="miFormulario" (submit)="guardar()">
+    <div class="row m-5 justify-content-center">
+      <div
+        class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-3 text-center"
+      >
+        <span class="form-text">Tipo</span>
+        <select
+          name="tipo"
+          id="tipo"
+          class="form-control"
+          formControlName="tipo"
+        >
+          <option value="">-- Seleccione un tipo --</option>
+          <option value="gasto">Gasto</option>
+          <option value="ingreso">Ingreso</option>
+        </select>
+        <small class="text-danger" id="" *ngIf="error('tipo')"
+          >{{ tipoMsg }}
+        </small>
+      </div>
+      <div
+        class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-3 text-center"
+      >
+        <span class="form-text">Cantidad</span>
+        <div class="col"></div>
+        <p-inputNumber inputId="integeronly" formControlName="cantidad">
+        </p-inputNumber>
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('cantidad')"
+          >{{ cantidadMsg }}
+        </small>
+      </div>
+      <div
+        class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-4 mb-3 text-center"
+      >
+        <span class="form-text">Concepto</span>
+        <div class="col"></div>
+        <textarea
+          formControlName="concepto"
+          [rows]="5"
+          [cols]="30"
+          pInputTextarea
+          [autoResize]="true"
+        ></textarea>
+        <div class="col"></div>
+        <small class="text-danger" id="" *ngIf="error('concepto')"
+          >{{ conceptoMsg }}
+        </small>
+      </div>
+    </div>
+
+    <div class="m-5">
+      <p-button
+        class="float-end"
+        label="Guardar"
+        type="submit"
+        icon="pi pi-check"
+        iconPos="right"
+      ></p-button>
+    </div>
+  </form>
+</ng-template>

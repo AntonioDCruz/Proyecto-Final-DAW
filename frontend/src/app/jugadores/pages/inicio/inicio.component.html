@@ -1,0 +1,69 @@
+<mat-sidenav-container #ready fullscreen>
+  <mat-sidenav #sidenav mode="push" color="warn">
+    <mat-toolbar>
+      <span>Menú</span>
+
+      <span class="spacer"></span>
+
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <a routerLink="." mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span>Inicio</span>
+      </a>
+
+      <a routerLink="./equipo" mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>sports_basketball</mat-icon>
+        <span>Equipo</span>
+      </a>
+
+      <a routerLink="./partidos" mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>sports</mat-icon>
+        <span>Partidos</span>
+      </a>
+
+      <a routerLink="./entrenamientos" mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>directions_run</mat-icon>
+        <span>Entrenamientos</span>
+      </a>
+
+      <a routerLink="./eventos" mat-list-item (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>meeting_room</mat-icon>
+        <span>Eventos</span>
+      </a>
+
+      <a
+        routerLink="./finanzas"
+        *ngIf="user.role_id === 1"
+        mat-list-item
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon mat-list-icon>monetization_on</mat-icon>
+        <span>Finanzas</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <button mat-button *ngIf="user" routerLink="./perfil">
+      {{ user.nombre_user }}
+      <mat-icon>assignment_ind</mat-icon>
+    </button>
+
+    <button mat-button (click)="logout()">Logout</button>
+  </mat-toolbar>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>

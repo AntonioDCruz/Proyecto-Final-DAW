@@ -1,0 +1,86 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <p-messages [value]="msgs"></p-messages>
+  <div class="row text-center m-4" *ngIf="authUser.role_id < 3">
+    <span span class="p-buttonset text-center">
+      <button
+        pButton
+        type="button"
+        [routerLink]="['./crearPartido']"
+        label="Añadir partido"
+        icon="pi pi-plus"
+        iconPos="right"
+      ></button>
+    </span>
+  </div>
+
+  <div class="frase" *ngIf="partidos.length === 0; else tabla">
+    <h2>No hay partidos disponibles</h2>
+  </div>
+
+  <ng-template #tabla>
+    <p-confirmDialog
+      header="Confirmation"
+      icon="pi pi-exclamation-triangle"
+    ></p-confirmDialog>
+
+    <div class="content">
+      <p-table [value]="partidos" [scrollable]="true" scrollHeight="100%">
+        <ng-template class="xddd" pTemplate="header">
+          <tr>
+            <th style="min-width: 200px">Fecha</th>
+            <th style="min-width: 200px">Hora</th>
+            <th style="min-width: 200px">Rival</th>
+            <th style="min-width: 200px">Local/Visitante</th>
+            <th style="min-width: 200px">Puntos Equipo - Puntos Rival</th>
+            <th *ngIf="authUser.role_id < 3" style="min-width: 200px"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-partido let-i>
+          <tr>
+            <td style="min-width: 200px">
+              {{ partido.fecha | date: "dd/MM/yyyy" }}
+            </td>
+            <td style="min-width: 200px">
+              {{ partido.hora.substring(0, 5) }}
+            </td>
+            <td style="min-width: 200px">
+              <span>
+                <img [src]="partido.rival_img" alt="" />
+                {{ partido.rival_nombre }}
+              </span>
+            </td>
+            <td style="min-width: 200px">{{ partido.campo | titlecase }}</td>
+            <td style="min-width: 200px">
+              {{ partido.puntos_equipo }} - {{ partido.puntos_rival }}
+            </td>
+            <td *ngIf="authUser.role_id < 3">
+              <p-button
+                label="Editar"
+                icon="pi pi-pencil"
+                iconPos="right"
+                styleClass="p-button-secondary"
+                [routerLink]="['./editarPartido', partido.id]"
+                [style]="{ 'margin-left': '.5em' }"
+              ></p-button>
+              <p-button
+                (click)="confirm2(partido)"
+                icon="pi pi-times"
+                label="Eliminar"
+                iconPos="right"
+                styleClass="p-button-danger"
+                [style]="{ 'margin-left': '.5em' }"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template>
+</ng-template>

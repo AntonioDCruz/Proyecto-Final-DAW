@@ -1,0 +1,57 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <h2 class="text-center mt-2">Editar Equipo</h2>
+  <form [formGroup]="miFormulario" (submit)="guardar()">
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="nombre"
+        class="p-inputtext-lg"
+        type="text"
+        pInputText
+      />
+      <label for="float-input">Nombre Equipo</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('nombre')"
+      >{{ nombreMsg }}
+    </small>
+
+    <span class="row ms-5 me-5 mt-5 p-float-label">
+      <input
+        formControlName="liga"
+        class="p-inputtext-lg"
+        type="text"
+        pInputText
+      />
+      <label for="float-input">Liga Equipo</label>
+    </span>
+    <small class="text-danger ms-5" *ngIf="error('liga')">{{ ligaMsg }} </small>
+
+    <div class="row ms-5 me-5 mt-5">
+      <div class="col-12">
+        <span class="form-text">Escudo</span>
+        <div class="input-group">
+          <input formControlName="image" class="form-control" name="image" />
+          <app-upload
+            (uploaded)="miFormulario.patchValue({ image: $event })"
+          ></app-upload>
+        </div>
+      </div>
+    </div>
+
+    <div class="ms-5 me-5 mt-5">
+      <p-button
+        class="float-end"
+        label="Guardar"
+        type="submit"
+        icon="pi pi-check"
+        iconPos="right"
+      ></p-button>
+    </div>
+  </form>
+</ng-template>

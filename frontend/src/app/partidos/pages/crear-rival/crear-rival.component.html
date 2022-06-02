@@ -1,0 +1,45 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <h2 class="text-center mt-2">{{ rival ? "Editar" : "Nuevo" }} Rival</h2>
+
+  <form [formGroup]="miFormulario" (submit)="guardar()">
+    <div class="row m-5 p-float-label">
+      <input
+        formControlName="nombre"
+        class="p-inputtext-lg"
+        type="text"
+        pInputText
+      />
+      <label for="float-input">Nombre</label>
+      <small class="text-danger" id="" *ngIf="error('nombre')"
+        >{{ nombreMsg }}
+      </small>
+    </div>
+
+    <div class="m-5">
+      <span class="form-text">Imagen</span>
+      <div class="input-group">
+        <input formControlName="image" class="form-control" name="image" />
+        <app-upload-image
+          (uploaded)="miFormulario.patchValue({ image: $event })"
+        ></app-upload-image>
+      </div>
+    </div>
+
+    <div class="m-5">
+      <p-button
+        class="float-end"
+        label="Guardar"
+        type="submit"
+        icon="pi pi-check"
+        iconPos="right"
+      ></p-button>
+    </div>
+  </form>
+</ng-template>

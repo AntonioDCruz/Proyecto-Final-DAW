@@ -1,0 +1,76 @@
+<div
+  class="m-0 vh-100 row justify-content-center align-items-center"
+  *ngIf="!aux; else info"
+>
+  <span class="loader col-auto text-center p-5"></span>
+</div>
+
+<ng-template #info>
+  <p-messages [value]="msgs"></p-messages>
+
+  <div class="row text-center m-4" *ngIf="authUser.role_id === 1">
+    <span span class="p-buttonset text-center">
+      <button
+        pButton
+        type="button"
+        [routerLink]="['./crearEvento']"
+        label="Añadir evento"
+        icon="pi pi-plus"
+        iconPos="right"
+      ></button>
+    </span>
+  </div>
+
+  <div class="frase" *ngIf="eventos.length === 0; else tabla">
+    <h2>No hay eventos disponibles</h2>
+  </div>
+
+  <ng-template #tabla>
+    <p-confirmDialog
+      header="Confirmation"
+      icon="pi pi-exclamation-triangle"
+    ></p-confirmDialog>
+
+    <div class="content">
+      <p-table [value]="eventos" [scrollable]="true" scrollHeight="100%">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="min-width: 200px">Título</th>
+            <th style="min-width: 200px">Fecha</th>
+            <th style="min-width: 200px">Hora</th>
+            <th style="min-width: 200px">Descripcion</th>
+            <th *ngIf="authUser.role_id < 3" style="min-width: 200px"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-evento let-i>
+          <tr>
+            <td style="min-width: 200px">{{ evento.titulo }}</td>
+            <td style="min-width: 200px">
+              {{ evento.fecha | date: "dd/MM/yyyy" }}
+            </td>
+            <td style="min-width: 200px">{{ evento.hora.substring(0, 5) }}</td>
+            <td style="min-width: 200px">{{ evento.descripcion }}</td>
+            <td *ngIf="authUser.role_id < 3">
+              <p-button
+                label="Editar"
+                icon="pi pi-pencil"
+                iconPos="right"
+                styleClass="p-button-secondary"
+                [routerLink]="['./editarEvento', evento.id]"
+                [style]="{ 'margin-left': '.5em' }"
+              ></p-button>
+              <p-button
+                (click)="confirm2(evento)"
+                icon="pi pi-times"
+                label="Eliminar"
+                iconPos="right"
+                styleClass="p-button-danger"
+                [style]="{ 'margin-left': '.5em' }"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template>
+</ng-template>
