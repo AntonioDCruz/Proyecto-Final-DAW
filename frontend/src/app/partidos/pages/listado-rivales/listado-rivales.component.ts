@@ -35,7 +35,7 @@ export class ListadoRivalesComponent implements OnInit {
 
   confirm2(rival: Rival) {
     this.confirmationService.confirm({
-      message: `¿Estás seguro de eliminar a ${rival.nombre}?`,
+      message: `¿Estás seguro de eliminar a ${rival.nombre}? Se eliminarán todos los partidos`,
       header: 'Eliminar Rival',
       icon: 'pi pi-info-circle',
       accept: () => {

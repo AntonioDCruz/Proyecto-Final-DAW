@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { EmailValidatorService } from './email-validator.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValidatorService {
 
-  constructor() { }
+  constructor(private es: EmailValidatorService) { }
 
   camposIguales( campo1: string, campo2: string ) {
 
@@ -28,4 +29,5 @@ export class ValidatorService {
     }
 
   }
+
 }

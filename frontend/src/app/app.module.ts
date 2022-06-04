@@ -1,5 +1,6 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { LOCALE_ID, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import  localeES  from "@angular/common/locales/es";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,8 @@ import { HomePageComponent } from './shared/home-page/home-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData( localeES );
 
 
 @NgModule({
@@ -26,6 +29,7 @@ import { CredentialsInterceptor } from './interceptors/credentials.interceptor';
     BrowserAnimationsModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CredentialsInterceptor,

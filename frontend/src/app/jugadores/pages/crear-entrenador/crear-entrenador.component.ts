@@ -40,7 +40,14 @@ export class CrearEntrenadorComponent implements OnInit {
     ],
     image_user: [''],
     salario: ['', [Validators.required, Validators.max(999999999)]],
-    telefono: ['', [Validators.required, Validators.maxLength(9), Validators.pattern('[0-9]{9}')]],
+    telefono: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(9),
+        Validators.pattern('[0-9]{9}'),
+      ],
+    ],
   });
 
   aux: boolean = false;
@@ -57,7 +64,10 @@ export class CrearEntrenadorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.router.url.includes('editarEntrenador') && !this.router.url.includes('editarManager') ) {
+    if (
+      !this.router.url.includes('editarEntrenador') &&
+      !this.router.url.includes('editarManager')
+    ) {
       this.aux = true;
       return;
     }
@@ -92,7 +102,7 @@ export class CrearEntrenadorComponent implements OnInit {
     return '';
   }
 
-  get nombreUserMsg(){
+  get nombreUserMsg() {
     const errors = this.miFormulario.get('nombre_user')?.errors;
     if (errors?.['required']) {
       return 'Introduce un nombre';
@@ -102,7 +112,7 @@ export class CrearEntrenadorComponent implements OnInit {
     return '';
   }
 
-  get apellidosMsg(){
+  get apellidosMsg() {
     const errors = this.miFormulario.get('apellidos')?.errors;
     if (errors?.['required']) {
       return 'Introduce los apellidos';
@@ -114,7 +124,7 @@ export class CrearEntrenadorComponent implements OnInit {
     return '';
   }
 
-  get salarioMsg(){
+  get salarioMsg() {
     const errors = this.miFormulario.get('salario')?.errors;
     if (errors?.['required']) {
       return 'Introduce un salario';
@@ -124,7 +134,7 @@ export class CrearEntrenadorComponent implements OnInit {
     return '';
   }
 
-  get telefonoMsg(){
+  get telefonoMsg() {
     const errors = this.miFormulario.get('telefono')?.errors;
     if (errors?.['required']) {
       return 'Introduce un número de teléfono';
@@ -152,7 +162,10 @@ export class CrearEntrenadorComponent implements OnInit {
     if (this.user?.id !== undefined) {
       this.us
         .actualizarEntrenador(this.user.id, this.miFormulario.getRawValue())
-        .subscribe((entrenador) => this.mostrarSnackBar('Entrenador Actualizado'));
+        .subscribe((entrenador) => {
+          this.mostrarSnackBar('Entrenador Actualizado');
+          this.router.navigate(['/inicio/equipo']);
+        });
     } else {
       this.us
         .crearEntrenador(this.miFormulario.getRawValue())
@@ -165,7 +178,7 @@ export class CrearEntrenadorComponent implements OnInit {
 
   mostrarSnackBar(mensaje: string) {
     this.snackBar.open(mensaje, 'OK!', {
-      duration: 2000,
+      duration: 5000,
     });
   }
 }

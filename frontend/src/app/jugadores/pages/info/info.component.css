@@ -8,6 +8,26 @@ mat-card-content {
   align-items: center;
 }
 
+.cardUser {
+  height: 78%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardUser mat-card-header {
+  flex-shrink: 0;
+}
+
+.cardUser mat-card-content {
+  flex-grow: 1;
+}
+
+.cardUser mat-card-actions {
+  display: flex;
+  justify-content: end;
+  align-self: center;
+}
+
 .loader {
   width: 48px;
   height: 48px;
@@ -34,6 +54,6 @@ mat-card-content {
 
 mat-card-actions {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-self: center;
 }

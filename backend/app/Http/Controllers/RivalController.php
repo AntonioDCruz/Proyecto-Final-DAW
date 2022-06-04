@@ -38,6 +38,8 @@ class RivalController extends Controller
 
     public function destroy($id)
     {
+        $Rival = Rival::find($id);
+        $Rival->partidos()->delete();
         Rival::destroy($id);
 
         return \response(null, Response::HTTP_NO_CONTENT);

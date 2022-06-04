@@ -20,7 +20,9 @@
       <br />
 
       <mat-list class="text-center">
-        <mat-list-item> Salario: {{ user.salario }} </mat-list-item>
+        <mat-list-item>
+          Salario: {{ user.salario | number: "1.0-2":"es-ES" }} €
+        </mat-list-item>
         <mat-list-item> Email: {{ user.email }} </mat-list-item>
         <mat-list-item> Teléfono: {{ user.telefono }} </mat-list-item>
         <div *ngIf="user.id_jugador">

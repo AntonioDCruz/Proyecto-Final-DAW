@@ -45,7 +45,9 @@
           <ng-template pTemplate="body" let-finanza let-i>
             <tr>
               <td style="min-width: 200px">{{ finanza.tipo | titlecase }}</td>
-              <td style="min-width: 200px">{{ finanza.cantidad | number }}</td>
+              <td style="min-width: 200px">
+                {{ finanza.cantidad | number: "1.0-2":"es-ES" }} €
+              </td>
               <td style="min-width: 200px">{{ finanza.concepto }}</td>
               <td *ngIf="authUser.role_id < 3">
                 <p-button
