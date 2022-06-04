@@ -19,7 +19,7 @@ export class EmailValidatorService implements AsyncValidator{
     const email = control.value
     let emails: string[] = []
     if (control.dirty) {
-      return this.http.get<Email[]>('http://localhost:8088/api/usersEmail')
+      return this.http.get<Email[]>('http://164.92.158.170:8088/api/usersEmail')
       .pipe(
         tap(res => console.log(res.length)),
         map((res: Email[]) => {
