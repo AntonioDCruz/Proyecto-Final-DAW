@@ -57,7 +57,8 @@
             </span>
             <strong>Email: </strong> {{ user.email }}
             <br />
-            <strong>Teléfono: </strong> {{ user.telefono }}
+            <strong *ngIf="user.telefono">Teléfono: </strong>
+            {{ user.telefono }}
           </p>
         </mat-card-content>
         <mat-card-actions *ngIf="user.role_id === 1" align="start">
