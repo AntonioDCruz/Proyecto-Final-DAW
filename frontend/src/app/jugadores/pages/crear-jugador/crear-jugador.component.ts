@@ -220,7 +220,11 @@ export class CrearJugadorComponent implements OnInit {
     if (this.user?.id !== undefined) {
       this.us
         .actualizarJugador(this.jugador.id, this.miFormulario.getRawValue())
-        .subscribe((jugador) => this.mostrarSnackBar('Jugador Actualizado'));
+        .subscribe((jugador) => {
+          this.mostrarSnackBar('Jugador Actualizado');
+          this.router.navigate(['/inicio/equipo']);
+
+        });
     } else {
       this.us.crearJugador(this.miFormulario.getRawValue()).subscribe((res) => {
         console.log(res);
@@ -231,7 +235,7 @@ export class CrearJugadorComponent implements OnInit {
 
   mostrarSnackBar(mensaje: string) {
     this.snackBar.open(mensaje, 'OK!', {
-      duration: 2000,
+      duration: 5000,
     });
   }
 }
