@@ -14,7 +14,7 @@ class ImageController extends Controller
         $url =  \Storage::putFileAs('images', $file, $name . '.' . $file->extension());
 
         return [
-            'url' => env('APP_URL') . '/' . $url
+            'url' => 'http://164.92.158.170:8088' . '/' . $url
         ];
     }
 }
